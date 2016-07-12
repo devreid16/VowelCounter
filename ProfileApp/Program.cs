@@ -15,8 +15,9 @@ namespace ProfileApp
 
             // Vowels list
             var vowels = new List<char>
-                { 'a', 'e', 'i', 'o', 'u', 'y' };                     
+                { 'a', 'e', 'i', 'o', 'u', 'y' };
 
+            //index counter for sentence length
             for (int i = 0; i < sentence.Length; i++)
             {
                 if (vowels.Contains(sentence[i]))
@@ -24,19 +25,39 @@ namespace ProfileApp
                     count++;
                 }
             }
-            
-            return count;            
 
+            //get number of characters
+            return count;
+        }
+
+        //prompt for sentence and reads
+        static string ReadSentence()
+        {
+            Console.WriteLine("Type a sentence:");
+            return Console.ReadLine().ToLower();
         }
         
+        //writes message and gives vowel count
+        static void Write(int count)
+        {
+            Console.WriteLine("The vowel count of your sentence is: {0}", count);
+            Console.WriteLine();
+        }
+
+        //display sentence, checks for "exit" ; if exit display quit message
         static void Main(string[] args)
         {
-            Console.WriteLine("Type a word:");
-            string sentence = Console.ReadLine().ToLower();
+            string sentence;
 
-            int count = VCount(sentence);
+            while ((sentence = ReadSentence()) != "exit")
+            {
+                int count = VCount(sentence);
 
-            Console.WriteLine("The vowel count of your sentence is: {0}", count);
+                Write(count);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Press enter to quit");
             Console.ReadLine();
         }
     }
